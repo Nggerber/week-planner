@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Work Day Scheduler</title>
+</head>
+
+<body>
+    <header class="jumbotron">
+        <h1 class="display-3">Work Day Scheduler</h1>
+        <p class="lead">A simple calendar app for scheduling your work day</p>
+        <p id="currentDay" class="lead"></p>
+    </header>
+
+    <div class="container">
+
+        <!-- Timeblocks go here -->
+
+        <div id="nine" class="row time-block">
+            <div class="col-md-1 hour">
+                9:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-9" data-hour="9">
+            </textarea>
+            <button class="btn saveBtn col-md-1" id="9">Save</button>
+        </div>
+
+        <div id="ten" class="row time-block">
+            <div class="col-md-1 hour">
+                10:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-10" data-hour="10">
+            </textarea>
+            <button class="btn saveBtn col-md-1" id="10">Save</button>
+        </div>
+
+        <div id="eleven" class="row time-block">
+            <div class="col-md-1 hour">
+                11:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-11" data-hour="11">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="twelve" class="row time-block">
+            <div class="col-md-1 hour">
+                12:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-12" data-hour="12">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="thirteen" class="row time-block">
+            <div class="col-md-1 hour">
+                13:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-13" data-hour="13">
+            </textarea>
+            <button class=" btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="fourteen" class="row time-block">
+            <div class="col-md-1 hour">
+                14:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-14" data-hour="14">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="fifteen" class="row time-block">
+            <div class="col-md-1 hour">
+                15:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-15" data-hour="15">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="sixteen" class="row time-block">
+            <div class="col-md-1 hour">
+                16:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-16" data-hour="16">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+        <div id="seventeen" class="row time-block">
+            <div class="col-md-1 hour">
+                17:00
+            </div>
+            <textarea class="col-md-10 description" id="user-input-17" data-hour="17">
+            </textarea>
+            <button class="btn saveBtn col-md-1">Save</button>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#currentDay").text(moment().format("MMMM Do , H:mm a"));
+
+                // variables to grab the value written in each time block
+
+                const time9 = $("#user-input-9")
+                const time10 = $("#user-input-10");
+                const time11 = $("#user-input-11");
+                const time12 = $("#user-input-12");
+                const time13 = $("#user-input-13");
+                const time14 = $("#user-input-14");
+                const time15 = $("#user-input-15");
+                const time16 = $("#user-input-16");
+                const time17 = $("#user-input-17");
+
+                //run the whattimeisit function at the start of the app
+
+                whatTimeIsIt();
+
+                time9.val(localStorage.getItem("9 user input"))
+
+                //click function for the save button to take whatever user input and store on local storage
+
+                $(".saveBtn").on("click", function (event) {
+                    console.log("click", event.currentTarget)
+                    let btn = $(event.currentTarget)
+                    let btnHour = btn.attr("id")
+                    let textArea = $("#user-input-" + btnHour).val();
+                    localStorage.setItem(btnHour + " user input", textArea);
+
+
+                })
+
+                //function that checks what time it is vs. the time block and changes color accoringly
+
+                function whatTimeIsIt() {
+
+
+
+                    // set variable to get the current hour
+
+                    let timeNow = moment().hour();
+
+                    console.log(timeNow)
+
+                    //create a variable that holds the possible timeblocks it could be
+                    $(".description").each(function (index, event) {
+                        let timeBlock = $(event).data("hour")
+                        console.log(timeBlock)
+
+                        if (timeBlock < timeNow) {
+                            $(event).addClass("past")
+                        }
+                        else if (timeBlock === timeNow) {
+                            $(event).addClass("present")
+                        }
+                        else {
+                            $(event).addClass("future")
+                        }
+
+                    })
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+</body>
+
+</html>
