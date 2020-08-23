@@ -50,7 +50,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-11" data-hour="11">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="11">Save</button>
         </div>
 
         <div id="twelve" class="row time-block">
@@ -59,7 +59,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-12" data-hour="12">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="12">Save</button>
         </div>
 
         <div id="thirteen" class="row time-block">
@@ -68,7 +68,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-13" data-hour="13">
             </textarea>
-            <button class=" btn saveBtn col-md-1">Save</button>
+            <button class=" btn saveBtn col-md-1" id="13">Save</button>
         </div>
 
         <div id="fourteen" class="row time-block">
@@ -77,7 +77,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-14" data-hour="14">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="14">Save</button>
         </div>
 
         <div id="fifteen" class="row time-block">
@@ -86,7 +86,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-15" data-hour="15">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="15">Save</button>
         </div>
 
         <div id="sixteen" class="row time-block">
@@ -95,7 +95,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-16" data-hour="16">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="16">Save</button>
         </div>
 
         <div id="seventeen" class="row time-block">
@@ -104,7 +104,7 @@
             </div>
             <textarea class="col-md-10 description" id="user-input-17" data-hour="17">
             </textarea>
-            <button class="btn saveBtn col-md-1">Save</button>
+            <button class="btn saveBtn col-md-1" id="17">Save</button>
         </div>
 
 
@@ -132,15 +132,35 @@
 
                 whatTimeIsIt();
 
+                //keep the values on the page
+
                 time9.val(localStorage.getItem("9 user input"))
+                time10.val(localStorage.getItem("10 user input"))
+                time11.val(localStorage.getItem("11 user input"))
+                time12.val(localStorage.getItem("12 user input"))
+                time13.val(localStorage.getItem("13 user input"))
+                time14.val(localStorage.getItem("14 user input"))
+                time15.val(localStorage.getItem("15 user input"))
+                time16.val(localStorage.getItem("16 user input"))
+                time17  .val(localStorage.getItem("17 user input"))
 
                 //click function for the save button to take whatever user input and store on local storage
 
                 $(".saveBtn").on("click", function (event) {
-                    console.log("click", event.currentTarget)
+
+                    //variable that selects the specific button that was clicked
+
                     let btn = $(event.currentTarget)
+
+                    //variable that defines the button by which hour it is associated to
+
                     let btnHour = btn.attr("id")
+
+                    //variable that selects the corresponding text area based on which button was pressed
+
                     let textArea = $("#user-input-" + btnHour).val();
+
+                    // store the input into the the storage
                     localStorage.setItem(btnHour + " user input", textArea);
 
 
@@ -150,19 +170,15 @@
 
                 function whatTimeIsIt() {
 
-
-
                     // set variable to get the current hour
 
                     let timeNow = moment().hour();
 
-                    console.log(timeNow)
-
                     //create a variable that holds the possible timeblocks it could be
                     $(".description").each(function (index, event) {
                         let timeBlock = $(event).data("hour")
-                        console.log(timeBlock)
 
+                        //if else statement to see how the current time compares to the time blocks and styles them accordingly
                         if (timeBlock < timeNow) {
                             $(event).addClass("past")
                         }
@@ -172,35 +188,9 @@
                         else {
                             $(event).addClass("future")
                         }
-
                     })
                 }
-
-
-
-
-
-
-
-
-
-
-
-
             })
-
-
-
-
-
-
-
-
-
-
-
-
-
         </script>
 </body>
 
