@@ -13,4 +13,5 @@ Script
 
 I started off my script using .moment to get the current day and time and I formatted it with capital H so the time would be displayed in a 24 hour clock I then displayed this in the header of the page. I then made variables that corresponded to each different input field. In order to save the users input I created a click function for when you hit a save button. Since each button has a seperate Id I was able to focus on that attribute and bull it out of each individual click. It then selects the specific text field to save in local storage. This values are then reloaded when the page is opened again and refreshed. Next I had to create a function that checked the current time and compared it to the values on the individual blocks. I used .moment to get the specific hour and then ran though the specific data id attached to each input field to to get the hour for that block. I then used a if else statement to compare those values to see if the fell in the past present or future and assigned them the proper class.
 
-img src = assets./Capture.PNG
+![day-planner](https://user-images.githubusercontent.com/67764086/93631013-25aae480-f9a8-11ea-8622-816ce7478d1c.PNG)
+
